@@ -1,0 +1,50 @@
+{% extends "frontend/base.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col s9"><a href="">
+          <h3>Picha!</h3>
+        </a></div>
+      <div class="col s3">
+        <button data-toggle="modal" data-target="#feedback_modal" class="btn btn-tp5 btn-solid">Got feedback</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal_area">
+  {% include 'frontend/parts/message_modal.html' %}
+  <!-- Modal -->
+  <div class="modal fade bd-example-modal-lg theme-modal" id="feedback_modal" tabindex="-1" role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body modal1">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="modal-bg">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4>We <3 feedback</h4>
+                        <form action="{% url 'feedback' %}" method="post">{% csrf_token %}
+                          {{ form.as_p }}
+                          <br>
+                          <button class="btn btn-success btn-solid">Enviar</button>
+                        </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

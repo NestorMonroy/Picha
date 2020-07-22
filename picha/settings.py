@@ -37,9 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
     # custom apps
     'feedback',
     'photos',
+    'frontend',
 )
 
 MIDDLEWARE = [
@@ -105,11 +107,24 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
-STATIC_ROOT = '/static/'
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static_Template"),
+]
+
+STATIC_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "static_root")
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "media_root")
+
+
+PROTECTED_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "protected_media")
 
 # CELERY
 BROKER_URL = 'redis://localhost:6379'
@@ -121,6 +136,18 @@ CELERY_TIMEZONE = 'Mexico/General'
 
 # Emails
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-DEFAULT_FROM_EMAIL = 'Picha <picha@example.com>'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)

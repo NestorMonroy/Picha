@@ -10,3 +10,4 @@ class FeedbackView(FormView):
     def form_valid(self, form):
         form.send_email()
         return super(FeedbackView, self).form_valid(form)
+

@@ -1,25 +1,40 @@
-{% extends "base.html" %}
+{% extends "frontend/base.html" %}
 
 {% block title %}Picha Feedback!{% endblock %}
 
 {% block headcss %}
-  <style>
-    .errorlist{
-      color:#ff0000;
-    }
-  </style>
+<style>
+  .errorlist {
+    color: #ff0000;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
+<div class="container">
   <div class="row">
-    <div class="col s12">
-      <h3>Feedback</h3>
-      <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-          <i class="mdi-content-send right"></i>
-        </button>
-      </form>
+    <div class="col-md-10 ml-auto mr-auto">
+      <div class="card card-signup">
+        <h2 class="card-title text-center">
+          Feedback
+        </h2>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-10 ml-auto mr-auto">
+              <form class="form" method="POST" id="post-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button class="btn btn-primary btn-round" type="submit" value="Post" name="action">Submit
+                  <i class="mdi-content-send right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
 {% endblock %}

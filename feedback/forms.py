@@ -1,5 +1,5 @@
 from django import forms
-# from feedback.tasks import send_feedback_email_task
+# from .tasks import send_feedback_email_task
 
 
 class FeedbackForm(forms.Form):
